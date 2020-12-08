@@ -23,8 +23,6 @@ public class RoomService {
     public Room createRoom(Room room) throws BusinessException {
         scheduleValidation(room);
         return RoomMapper.unmarshall(roomRepository.save(RoomMapper.marshall(room)));
-
-        //return new Room(1L,"qualquerUm",null,null,null);
     }
 
     private void scheduleValidation(Room roomEntity) throws BusinessException {
@@ -42,13 +40,13 @@ public class RoomService {
         return RoomMapper.unmarshall(roomRepository.findAll());
     }
 
-    public Room getRoomById(long roomId) throws BusinessException {
+    public Room getRoomById(Long roomId) throws BusinessException {
 
         return  RoomMapper.unmarshall(roomRepository.findById(roomId)
                 .orElseThrow(() -> new BusinessException(BusinessException.ROOM_NOT_FOUND+": "+roomId)));
     }
 
-    public Room updateRoom(long roomId, Room room) throws BusinessException {
+    public Room updateRoom(Long roomId, Room room) throws BusinessException {
 
         RoomEntity entity = roomRepository.findById(roomId).orElseThrow(() -> new BusinessException(BusinessException.ROOM_NOT_FOUND + ": " + roomId));
         scheduleValidation(room);
@@ -56,7 +54,7 @@ public class RoomService {
         return  RoomMapper.unmarshall(roomRepository.save(RoomMapper.marshall(room)));
     }
 
-    public Map<String, Boolean> deleteRoom(long roomId) throws BusinessException {
+    public Map<String, Boolean> deleteRoom(Long roomId) throws BusinessException {
         Optional<RoomEntity> room =  roomRepository.findById(roomId);
 
         if(room.isEmpty())

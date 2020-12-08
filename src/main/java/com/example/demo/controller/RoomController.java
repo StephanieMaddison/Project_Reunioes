@@ -17,32 +17,29 @@ import java.util.Map;
 public class RoomController extends IController{
 
     @Autowired
-    private RoomRepository roomRepository;
-
-    @Autowired
     private RoomService roomService;
 
-    @GetMapping(URL)
+    @GetMapping(ROOM_URL)
     public List<Room> getAllRooms(){
         return roomService.getAllRooms();
     }
 
-    @GetMapping(URL_ID)
-    public ResponseEntity<Room> getRoomById(@PathVariable(value = "id") long roomId) throws BusinessException {
+    @GetMapping(ROOM_URL_ID)
+    public ResponseEntity<Room> getRoomById(@PathVariable(value = "id") Long roomId) throws BusinessException {
             return ResponseEntity.ok().body(roomService.getRoomById(roomId));
     }
 
-    @PostMapping(URL)
+    @PostMapping(ROOM_URL)
     public Room createRoom(@RequestBody Room room) throws BusinessException {
         return roomService.createRoom(room);
     }
 
-    @PutMapping(URL_ID)
-    public ResponseEntity<Room> updateRoom(@PathVariable(value= "id") long roomId, @Valid @RequestBody Room room) throws BusinessException {
+    @PutMapping(ROOM_URL_ID)
+    public ResponseEntity<Room> updateRoom(@PathVariable(value= "id") Long roomId, @Valid @RequestBody Room room) throws BusinessException {
         return ResponseEntity.ok(roomService.updateRoom(roomId, room));
     }
 
-    @DeleteMapping(URL_ID)
+    @DeleteMapping(ROOM_URL_ID)
     public Map<String, Boolean> deleteRoom(@PathVariable(value = "id")Long roomId) throws BusinessException {
         return roomService.deleteRoom(roomId);
     }
