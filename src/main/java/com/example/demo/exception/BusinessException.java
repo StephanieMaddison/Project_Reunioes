@@ -12,6 +12,7 @@ public class BusinessException extends Exception {
     public static final String ROOM_NOT_FOUND = "Room Not Found";
     public static final String TIME_ERROR = "the start time must precede the end time";
     public static final String PARTICIPANT_NOT_FOUND = "Participant not found";
+    public static final String EMPTY_FIELD = "cannot register with empty or null field";
 
     public BusinessException(String message){
         super(message);

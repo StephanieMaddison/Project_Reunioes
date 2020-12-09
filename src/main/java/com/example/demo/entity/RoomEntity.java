@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 
+import com.example.demo.model.Equipment;
+import com.example.demo.model.Participant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,4 +46,10 @@ public class RoomEntity {
     @JoinTable(name="room_Participants", joinColumns = { @JoinColumn(name="meetingroom_id") }, inverseJoinColumns = { @JoinColumn(name="participants_id")})
     private List<ParticipantEntity> participants;
 
+    @ManyToOne
+    @JoinColumn(name = "equipmentId")
+    private EquipmentEntity equipment;
+
+    public RoomEntity(Long id, String name, LocalDate date, LocalTime startHour, LocalTime endHour, Equipment equipment, List<Participant> participants) {
+    }
 }

@@ -1,18 +1,21 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.EquipmentEntity;
+import com.example.demo.entity.ParticipantEntity;
 import com.example.demo.exception.BusinessException;
 import com.example.demo.entity.RoomEntity;
+import com.example.demo.mapper.ParticipantMapper;
 import com.example.demo.mapper.RoomMapper;
+import com.example.demo.model.Equipment;
+import com.example.demo.model.Participant;
 import com.example.demo.model.Room;
 import com.example.demo.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalTime;
+import java.util.*;
 
 @Service
 public class RoomService {
@@ -20,9 +23,17 @@ public class RoomService {
     @Autowired
     private RoomRepository roomRepository;
 
-    public Room createRoom(Room room) throws BusinessException {
-        scheduleValidation(room);
-        return RoomMapper.unmarshall(roomRepository.save(RoomMapper.marshall(room)));
+    public Room createRoom(Room room){
+        ParticipantEntity participant = new ParticipantEntity(1L,"teste","teste");
+        EquipmentEntity equipment = new EquipmentEntity(1l, "Slide", "001");
+        List<ParticipantEntity> listEntity = new ArrayList<>();
+        listEntity.add(participant);
+        return RoomMapper.unmarshall(roomRepository.save( new RoomEntity(null,"teste", LocalDate.now(), LocalTime.of(12,00,00),
+                LocalTime.of(13,00,00),  listEntity, equipment)));
+
+
+//RoomMapper.unmarshall(roomRepository.save(RoomMapper.marshall(room)));
+
     }
 
     private void scheduleValidation(Room roomEntity) throws BusinessException {

@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.entity.EquipmentEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +36,13 @@ public class Room {
     @ApiModelProperty(example = "hh:mm:ss")
     private LocalTime endHour;
 
+    @NotNull(message = "Null Field: equipment")
+    private Equipment equipment;
+
     @NotNull(message = "Null Field: ListParticipants")
     private List<Participant> participants;
-    
+
+
+    public Room(Long id, String name, LocalDate date, LocalTime startHour, LocalTime endHour, EquipmentEntity equipment, List<Participant> collect) {
+    }
 }
