@@ -1,17 +1,20 @@
-package com.example.demo.model;
+package com.example.demo.dto;
 
+import com.example.demo.model.Equipment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Equipment {
+public class EquipmentDTO {
 
     private Long id;
     private String nome;
     private String numSerie;
+
+    public Equipment transformModel(){
+        return new Equipment(id,nome,numSerie);
+    }
 }

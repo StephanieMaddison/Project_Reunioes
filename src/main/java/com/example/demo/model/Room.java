@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.example.demo.entity.EquipmentEntity;
+import com.example.demo.entity.ParticipantEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,6 +44,4 @@ public class Room {
     private List<Participant> participants;
 
 
-    public Room(Long id, String name, LocalDate date, LocalTime startHour, LocalTime endHour, EquipmentEntity equipment, List<Participant> collect) {
-    }
 }

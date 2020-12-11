@@ -14,20 +14,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RoomMapper {
-    
+
     public static RoomEntity marshall(Room model){
-        return new RoomEntity(model.getId(), model.getName(),model.getDate(),model.getStartHour(),model.getEndHour(), model.getEquipment(), model.getParticipants());
+        return new RoomEntity(model.getId(), model.getName(),model.getDate(),model.getStartHour(),model.getEndHour(),marshallEquip(model.getEquipment()), model.getParticipants()
+                .stream().map( Participant  ->  new ParticipantEntity(Participant.getId(), Participant.getName(), Participant.getEmail())).collect(Collectors.toList()));
     }
+
     public static Room unmarshall(RoomEntity entity){
-        return new Room(entity.getId(), entity.getName(),entity.getDate(),entity.getStartHour(),entity.getEndHour(),entity.getEquipment(), entity.getParticipants()
+        return new Room(entity.getId(), entity.getName(),entity.getDate(),entity.getStartHour(),entity.getEndHour(),unmarshallEquip(entity.getEquipment()), entity.getParticipants()
                 .stream().map( ParticipantEntity  ->  new Participant(ParticipantEntity.getId(), ParticipantEntity.getName(), ParticipantEntity.getEmail())).collect(Collectors.toList()));
     }
+
     public static  List<RoomEntity> marshall (List<Room> listRoom){
-        return listRoom.stream().map(RoomMapper::marshall).collect(Collectors.toList());
+        return listRoom.stream().map(  room -> marshall(room)  ).collect(Collectors.toList());
     }
-    
     public static List<Room> unmarshall (List<RoomEntity> listEntity){
-        return  listEntity.stream().map(RoomMapper::unmarshall).collect(Collectors.toList());
+        return  listEntity.stream().map( entity -> unmarshall(entity) ).collect(Collectors.toList());
     }
 
     public  static EquipmentEntity marshallEquip(Equipment model){

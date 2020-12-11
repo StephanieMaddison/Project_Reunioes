@@ -35,21 +35,19 @@ public class RoomEntity {
     private LocalDate date;
 
     @NotNull(message = "Null Field : starHour" )
-    @Column(name = "startHour", nullable = false)
+    @Column(name = "startHour")
     private LocalTime startHour;
 
     @NotNull(message = "Null Field : endHour" )
-    @Column(name = "endHour", nullable = false)
+    @Column(name = "endHour")
     private LocalTime endHour;
-
-    @ManyToMany
-    @JoinTable(name="room_Participants", joinColumns = { @JoinColumn(name="meetingroom_id") }, inverseJoinColumns = { @JoinColumn(name="participants_id")})
-    private List<ParticipantEntity> participants;
 
     @ManyToOne
     @JoinColumn(name = "equipmentId")
     private EquipmentEntity equipment;
 
-    public RoomEntity(Long id, String name, LocalDate date, LocalTime startHour, LocalTime endHour, Equipment equipment, List<Participant> participants) {
-    }
+    @ManyToMany
+    @JoinTable(name="room_Participants", joinColumns = { @JoinColumn(name="meetingroom_id") }, inverseJoinColumns = { @JoinColumn(name="participants_id")})
+    private List<ParticipantEntity> participants;
+
 }
