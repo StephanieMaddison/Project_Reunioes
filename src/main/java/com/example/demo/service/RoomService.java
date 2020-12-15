@@ -24,11 +24,11 @@ public class RoomService {
 
     public Room createRoom(Room room) throws BusinessException {
         scheduleValidation(room);
-        RoomEntity entity = RoomMapper.marshall(room);
-        RoomEntity entitySalva = roomRepository.save(entity);
-        Room retorno = RoomMapper.unmarshall(entitySalva);
-        return retorno;
-        //return RoomMapper.unmarshall(roomRepository.save(RoomMapper.marshall(room)));
+//        RoomEntity entity = RoomMapper.marshall(room);
+//        RoomEntity entitySalva = roomRepository.save(entity);
+//        Room retorno = RoomMapper.unmarshall(entitySalva);
+//        return retorno;
+        return RoomMapper.unmarshall(roomRepository.save(RoomMapper.marshall(room)));
     }
 
     private void scheduleValidation(Room roomEntity) throws BusinessException {
